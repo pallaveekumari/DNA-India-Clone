@@ -3,9 +3,7 @@ import Navbar from '../Components/Navbar';
 import Sidebar from '../Components/Sidebar';
 import { Box, Flex, Image, Text, Link } from '@chakra-ui/react';
 import Footer from '../Components/Footer';
-import { useState } from "react"
-import { useEffect } from 'react';
-import axios from "axios"
+
 import { useContext } from 'react';
 import { AppContext } from '../Components/AppContext';
 import { useNavigate } from 'react-router-dom';
@@ -15,12 +13,7 @@ import Rightsidebar from '../Components/Rightsidebar';
 
 const Homepage = () => {
 
-  // const [data,setData]= useState([])
 
-  // useEffect(()=>{
-  //   axios.get("https://dnaindia.herokuapp.com/home-page")
-  //   .then(res=>setData(res.data))
-  // })
 
   const { handleAddDescriptionData, homedata } = useContext(AppContext);
 
