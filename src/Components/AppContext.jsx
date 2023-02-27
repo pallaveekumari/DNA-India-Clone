@@ -1,48 +1,52 @@
 import axios from "axios";
-import { createContext,useState,useEffect } from "react";
+import { createContext, useState, useEffect } from "react";
 
-export const AppContext=createContext()
+export const AppContext = createContext();
 
+export default function AppContextProvider({ children }) {
+  const [descData, setDescData] = useState({});
 
+  const [homedata, sethomeData] = useState([]);
 
-export default function AppContextProvider({children})
-{
+  const [latestdata, setlatestData] = useState([]);
 
-    const [descData,setDescData] = useState({});
+  useEffect(() => {
+    axios
+      .get("https://dnadata.onrender.com/home-page")
+      .then((res) => sethomeData(res.data));
+  }, []);
 
+  useEffect(() => {
+    axios
+      .get("https://dnadata.onrender.com/latest-news")
+      .then((res) => setlatestData(res.data));
+  }, []);
 
-    const  [homedata,sethomeData] =useState([])
-    const[latestdata,setlatestData] =useState([])
+  const handlesearch = (query) => {
+    axios({
+      url: "https://dnadata.onrender.com/home-page",
+      params: {
+        q: query,
+      },
+    }).then((res) => sethomeData(res.data));
+  };
+  const handleAddDescriptionData = (data) => {
+    setDescData({ data });
+  };
 
-    useEffect(()=>{
-            axios.get("https://dnaindia.herokuapp.com/home-page")
-            .then(res=>sethomeData(res.data))
-          },[])
+  console.log(descData);
 
-    
-    useEffect(()=>{
-            axios.get("https://dnaindia.herokuapp.com/latest-news")
-            .then(res=>setlatestData(res.data))
-          },[])
-
-
-    const handlesearch=(query)=>{
-       axios({
-        url:"https://dnaindia.herokuapp.com/home-page",
-        params:{
-            q:query
-        }
-       }).then(res=>sethomeData(res.data))
-    }
-const handleAddDescriptionData=(data)=>{
-   setDescData({data})
-}
-
-console.log(descData)
-
-    return (
-        <AppContext.Provider value={{descData,handleAddDescriptionData,homedata,latestdata,handlesearch}}>
-            {children}
-        </AppContext.Provider>
-    )
+  return (
+    <AppContext.Provider
+      value={{
+        descData,
+        handleAddDescriptionData,
+        homedata,
+        latestdata,
+        handlesearch,
+      }}
+    >
+      {children}
+    </AppContext.Provider>
+  );
 }
