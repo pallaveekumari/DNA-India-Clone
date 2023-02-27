@@ -15,7 +15,7 @@ const Latestnews = () => {
   //  const [data,setData]= useState([])
 
   //   useEffect(()=>{
-  //     axios.get("https://dnadata.onrender.com/latest-news")
+  //     axios.get("https://dna-bvdf.onrender.com//latest-news")
   //     .then(res=>setData(res.data))
   //   })
 

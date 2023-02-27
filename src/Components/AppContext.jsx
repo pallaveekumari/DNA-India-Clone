@@ -12,19 +12,19 @@ export default function AppContextProvider({ children }) {
 
   useEffect(() => {
     axios
-      .get("https://dnadata.onrender.com/home-page")
+      .get("https://dna-bvdf.onrender.com//home-page")
       .then((res) => sethomeData(res.data));
   }, []);
 
   useEffect(() => {
     axios
-      .get("https://dnadata.onrender.com/latest-news")
+      .get("https://dna-bvdf.onrender.com//latest-news")
       .then((res) => setlatestData(res.data));
   }, []);
 
   const handlesearch = (query) => {
     axios({
-      url: "https://dnadata.onrender.com/home-page",
+      url: "https://dna-bvdf.onrender.com//home-page",
       params: {
         q: query,
       },
